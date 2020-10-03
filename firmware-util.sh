@@ -12,7 +12,8 @@
 #
 
 #where the stuff is
-script_url="https://raw.githubusercontent.com/MrChromebox/scripts/master/"
+#script_url="https://raw.githubusercontent.com/Silly-Lio/scripts/master/"
+script_url="https://raw.githubusercontent.com/Silly-Lio/scripts/master/"
 
 #ensure output of system tools in en-us for parsing
 export LC_ALL=C
@@ -37,10 +38,21 @@ curl -sLO ${script_url}functions.sh
 rc1=$?
 curl -sLO ${script_url}sources.sh
 rc2=$?
-if [[ $rc0 -ne 0 || $rc1 -ne 0 || $rc2 -ne 0 ]]; then
-	echo -e "Error downloading one or more required files; cannot continue"
+if [[ $rc0 -ne 0 ]]; then
+	echo -e "Error firmware downloading one or more required files; cannot continue"
 	exit 1
 fi
+
+if [[ $rc1 -ne 0 ]]; then
+	echo -e "Error functions downloading one or more required files; cannot continue"
+	exit 1
+fi
+
+if [[ $rc2 -ne 0 ]]; then
+	echo -e "Error sources downloading one or more required files; cannot continue"
+	exit 1
+fi
+
 
 source ./sources.sh
 source ./firmware.sh
