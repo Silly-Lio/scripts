@@ -21,8 +21,8 @@ export LC_ALL=C
 #set working dir
 if cat /etc/lsb-release | grep "Chrom" > /dev/null 2>&1; then
 	# needed for ChromeOS/ChromiumOS v82+
-	mkdir -p /usr/local/bin
-	cd /usr/local/bin
+	mkdir -p /usr/local
+	cd /usr/local
 else
 	cd /tmp
 fi
@@ -32,19 +32,24 @@ echo -e "\nDownloading supporting files..."
 rm -rf firmware.sh >/dev/null 2>&1
 rm -rf functions.sh >/dev/null 2>&1
 rm -rf sources.sh >/dev/null 2>&1
-curl -sLO ${script_url}firmware.sh
+curl -LO ${script_url}firmware.sh
 rc0=$?
-curl -sLO ${script_url}functions.sh
+curl -LO ${script_url}functions.sh
 rc1=$?
-curl -sLO ${script_url}sources.sh
+curl -LO ${script_url}sources.sh
 rc2=$?
 
-if [[ $rc1 -ne 0 ]]; then
+if [ $rc0 -ne 0 ]; then
+	echo -e "Error firmware downloading one or more required files; cannot continue"
+	exit 1
+fi
+
+if [ $rc1 -ne 0 ]; then
 	echo -e "Error functions downloading one or more required files; cannot continue"
 	exit 1
 fi
 
-if [[ $rc2 -ne 0 ]]; then
+if [ $rc2 -ne 0 ]; then
 	echo -e "Error sources downloading one or more required files; cannot continue"
 	exit 1
 fi
