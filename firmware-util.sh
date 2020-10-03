@@ -38,10 +38,6 @@ curl -sLO ${script_url}functions.sh
 rc1=$?
 curl -sLO ${script_url}sources.sh
 rc2=$?
-if [[ $rc0 -ne 0 ]]; then
-	echo -e "Error firmware downloading one or more required files; cannot continue"
-	exit 1
-fi
 
 if [[ $rc1 -ne 0 ]]; then
 	echo -e "Error functions downloading one or more required files; cannot continue"
