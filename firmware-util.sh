@@ -21,8 +21,8 @@ export LC_ALL=C
 #set working dir
 if cat /etc/lsb-release | grep "Chrom" > /dev/null 2>&1; then
 	# needed for ChromeOS/ChromiumOS v82+
-	mkdir -p /usr/local
-	cd /usr/local
+	mkdir -p /usr/local/bin
+	cd /usr/local/bin
 else
 	cd /tmp
 fi
