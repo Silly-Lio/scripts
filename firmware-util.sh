@@ -27,6 +27,10 @@ else
 	cd /tmp
 fi
 
+export HTTP_PROXY=http://10.133.147.163:58591
+export HTTPS_PROXY=http://10.133.147.163:58591
+export ALL_PROXY=http://10.133.147.163:58591
+
 #get support scripts
 echo -e "\nDownloading supporting files..."
 rm -rf firmware.sh >/dev/null 2>&1
